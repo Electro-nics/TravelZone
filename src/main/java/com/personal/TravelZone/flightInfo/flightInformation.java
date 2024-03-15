@@ -2,7 +2,25 @@ package com.personal.TravelZone.flightInfo;
 
 import java.util.Objects;
 
-public class flightInformation {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "FlightInformation",schema = "Public")
+public class FlightInformation {
+	@Id
+	@SequenceGenerator(name="flight_id_sequence",
+	sequenceName = "flight_id_sequence"
+			)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator="flight_id_sequence"
+			)
+	private Integer id;
 	private String flightId;
 	private String airlineName;
 	private String ETA;
@@ -11,10 +29,10 @@ public class flightInformation {
 	private long seatCount;
 	private String source;
 	private String destination;
-	public flightInformation() {
+	public FlightInformation() {
 		
 	}
-	public flightInformation(String flightId, String airlineName, String eTA, String eDT, float fare, long seatCount,
+	public FlightInformation(String flightId, String airlineName, String eTA, String eDT, float fare, long seatCount,
 			String source, String destination) {
 		this.flightId = flightId;
 		this.airlineName = airlineName;
@@ -85,7 +103,7 @@ public class flightInformation {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		flightInformation other = (flightInformation) obj;
+		FlightInformation other = (FlightInformation) obj;
 		return Objects.equals(EDT, other.EDT) && Objects.equals(ETA, other.ETA)
 				&& Objects.equals(airlineName, other.airlineName) && Objects.equals(destination, other.destination)
 				&& Float.floatToIntBits(fare) == Float.floatToIntBits(other.fare)

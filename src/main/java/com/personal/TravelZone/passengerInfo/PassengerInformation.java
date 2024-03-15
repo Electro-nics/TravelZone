@@ -2,7 +2,23 @@ package com.personal.TravelZone.passengerInfo;
 
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+@Entity
+@Table(name = "PassengerInformation")
 public class PassengerInformation {
+	@Id
+	@SequenceGenerator(name="flight_id_sequence",
+	sequenceName = "passenger_id_sequence"
+			)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator="passenger_id_sequence"
+			)
 	private Integer id;
 	private String name;
 	private String age;
@@ -10,8 +26,8 @@ public class PassengerInformation {
 	private String gender;
 	private String pnrDetails;
 	public PassengerInformation() {}
-	public PassengerInformation(Integer id, String name, String age, String email, String gender, String pnrDetails) {
-		this.id = id;
+	public PassengerInformation( String name, String age, String email, String gender, String pnrDetails) {
+		
 		this.name = name;
 		this.age = age;
 		this.email = email;
