@@ -1,15 +1,18 @@
 package com.personal.TravelZone.UserInfo;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.personal.TravelZone.exceptions.DuplicateResourceException;
 @Service
 public class UserInformationService {
 	public final UserInformationDAO userInformationDAO;
+	public final PasswordEncoder passwordEncoder;
 
-	public UserInformationService(@Qualifier("jpa") UserInformationDAO userInformationDAO) {
+	public UserInformationService(@Qualifier("jpa") UserInformationDAO userInformationDAO, PasswordEncoder passwordEncoder) {
 		this.userInformationDAO = userInformationDAO;
+		this.passwordEncoder=passwordEncoder;
 	}
 	public void userRegistration(UserRegistrationDetails userRegistrationDetails) {
 		String email=userRegistrationDetails.email();
@@ -25,7 +28,7 @@ public class UserInformationService {
 		userInformationDAO.userInformationRegistration(
 				new UserInformation(userRegistrationDetails.userAddress(),
 						userRegistrationDetails.userName(),
-						userRegistrationDetails.password(),
+						this.passwordEncoder.encode(userRegistrationDetails.password()),
 						userRegistrationDetails.email(),
 						userRegistrationDetails.phone())
 				
