@@ -50,8 +50,8 @@ public class TravelZoneApplication {
 					ETA,
 					fare,
 					age,
-					"Delhi",
-					"Goa");
+					fake.address().city(),
+					fake.address().city());
 			List<FlightInformation> flightdetails=List.of(flightInfo);
 			flightInformationRepository.saveAll(flightdetails);
 			

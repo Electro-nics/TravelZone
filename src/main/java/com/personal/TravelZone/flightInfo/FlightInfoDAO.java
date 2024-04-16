@@ -1,5 +1,8 @@
 package com.personal.TravelZone.flightInfo;
 
-public interface FlightInfoDAO {
+import java.util.List;
 
+public interface FlightInfoDAO {
+public List<String>getAllSourceLocation();
+public List<String>getAllDestinationLocation();
 }
