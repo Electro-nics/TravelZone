@@ -1,5 +1,6 @@
 package com.personal.TravelZone;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -13,7 +14,7 @@ import com.github.javafaker.Faker;
 import com.personal.TravelZone.UserInfo.UserInformation;
 import com.personal.TravelZone.UserInfo.UserInformationRepository;
 import com.personal.TravelZone.flightInfo.FlightInformation;
-import com.personal.TravelZone.flightInfo.FlightInformationRepository;
+import com.personal.TravelZone.flightInfo.repository.FlightInformationRepository;
 import com.personal.TravelZone.passengerInfo.PassengerInformation;
 import com.personal.TravelZone.passengerInfo.PassengerInformationRepository;
 
@@ -40,6 +41,11 @@ public class TravelZoneApplication {
 		int fare= fake.number().numberBetween(1000, 9999);
 		String gender="Male";
 		int age=rand.nextInt(20, 60);
+		@SuppressWarnings("deprecation")
+		Date start= new Date(2024, 01, 01);
+		@SuppressWarnings("deprecation")
+		Date end= new Date(2029, 01, 01);
+		
 		
 		return args->{
 
@@ -51,7 +57,8 @@ public class TravelZoneApplication {
 					fare,
 					age,
 					fake.address().city(),
-					fake.address().city());
+					fake.address().city(),
+					fake.date().between(start, end).toString());
 			List<FlightInformation> flightdetails=List.of(flightInfo);
 			flightInformationRepository.saveAll(flightdetails);
 			
