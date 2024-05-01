@@ -3,12 +3,14 @@ package com.personal.TravelZone.flightInfo.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.personal.TravelZone.exceptions.ResourceNotFoundException;
 import com.personal.TravelZone.flightInfo.FlightInformation;
 import com.personal.TravelZone.flightInfo.dataAccessObject.FlightInfoDAO;
 import com.personal.TravelZone.flightInfo.recorder.FlightAvalibilityRecorder;
@@ -44,9 +46,9 @@ public List<FlightDestinationRecorder> getDestinationDetails(){
 			.collect(Collectors.toList());
 }
 
-public List<FlightInformation> getOnewardsFlight(String source, String Destination, String Date) {
+public FlightInformation getOnewardsFlight(String source, String Destination, String date) {
 	// TODO Auto-generated method stub
-	List<FlightInformation> flightData=flightInfoDAO.flightByDate(source, Destination, Date);
-	return flightData;
+	Optional<FlightInformation> flightData= flightInfoDAO.flightByDate(source, Destination, date);
+	return flightData.orElseThrow(()->new ResourceNotFoundException("No flight found with Source Location : [%s], Destination : [%s] and Date : [%s]".formatted(source,Destination,date)));
 }
 }

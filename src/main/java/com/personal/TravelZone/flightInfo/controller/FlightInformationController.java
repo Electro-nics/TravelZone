@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.personal.TravelZone.flightInfo.FlightInformation;
-import com.personal.TravelZone.flightInfo.recorder.FlightAvalibilityRecorder;
+
 import com.personal.TravelZone.flightInfo.recorder.FlightDestinationRecorder;
 import com.personal.TravelZone.flightInfo.recorder.FlightSourceRecorder;
 import com.personal.TravelZone.flightInfo.response.ObjectResponse;
@@ -52,18 +53,12 @@ public ResponseEntity<ObjectResponse> getAllOnwardFlights(
 		)
 {
 	ObjectResponse resp= new ObjectResponse();
-	List<FlightInformation> oneWayFlights= flightInfoService.getOnewardsFlight(source, destination, departureDate);
-	if(oneWayFlights.isEmpty()) {
-		resp.setMessage("No Flights available !!");
-		
-		
-		return new ResponseEntity<ObjectResponse>(resp, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+	
+	FlightInformation oneWayFlights=  flightInfoService.
+			getOnewardsFlight(source, destination, departureDate);
 	try {
-		
 		resp.setResponseData(oneWayFlights);
-		resp.setStatusCode(HttpStatus.OK);
-		resp.setMessageType("SUCCESS");
+		resp.setStatusCode(true ? HttpStatus.OK:HttpStatus.NOT_FOUND);
 		
 	} catch (Exception e) {
 		resp.setResponseData(HttpStatus.BAD_REQUEST);

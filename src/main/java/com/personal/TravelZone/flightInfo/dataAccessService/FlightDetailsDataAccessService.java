@@ -2,6 +2,7 @@ package com.personal.TravelZone.flightInfo.dataAccessService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -39,7 +40,7 @@ public final FlightInformationRepository flightInformationRepository;
 	}
 
 	@Override
-	public List<FlightInformation> flightByDate(String source, String destination, String journeydate) {
+	public Optional<FlightInformation> flightByDate(String source, String destination, String journeydate) {
 		
 		return flightInformationRepository.findBySourceAndDestinationAndDepurtureDate(source, destination, journeydate);
 	}

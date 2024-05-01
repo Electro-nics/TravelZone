@@ -2,6 +2,7 @@ package com.personal.TravelZone.flightInfo.repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,7 +20,7 @@ public interface FlightInformationRepository extends JpaRepository<FlightInforma
 	@Query("SELECT DISTINCT destination from FlightInformation")
 	List<String> findAllDistinctDestination();
 	
-	List<FlightInformation>findBySourceAndDestinationAndDepurtureDate(String source, String destination, String journeyDate);
+	Optional<FlightInformation> findBySourceAndDestinationAndDepurtureDate(String source, String destination, String journeyDate);
 
 	
 	

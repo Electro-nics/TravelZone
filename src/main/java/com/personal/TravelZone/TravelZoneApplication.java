@@ -41,10 +41,24 @@ public class TravelZoneApplication {
 		int fare= fake.number().numberBetween(1000, 9999);
 		String gender="Male";
 		int age=rand.nextInt(20, 60);
-		@SuppressWarnings("deprecation")
-		Date start= new Date(2024, 01, 01);
-		@SuppressWarnings("deprecation")
-		Date end= new Date(2029, 01, 01);
+		
+		Integer day= fake.number().numberBetween(1, 31);
+		Integer month= fake.number().numberBetween(1, 12);
+		Integer year=fake.number().numberBetween(2024, 2040);
+		String deturtureDate=null;
+		
+		
+		if(day.toString().length()==1 && month.toString().length()==1) {
+			deturtureDate="0"+day+"-"+"0"+month+"-"+year;
+		}else if(day.toString().length()==1 && month.toString().length()!=1){
+			deturtureDate="0" + day + "-" + month + "-" + year;
+		}else if(month.toString().length()==1 && day.toString().length()!=1) {
+			deturtureDate=day+"-"+"0"+month+"-"+year;
+		}else {
+			deturtureDate=day +"-"+ month + "-" + year;
+		}
+		String finaldate=deturtureDate;
+		
 		
 		
 		return args->{
@@ -58,7 +72,7 @@ public class TravelZoneApplication {
 					age,
 					fake.address().city(),
 					fake.address().city(),
-					fake.date().between(start, end).toString());
+					finaldate);
 			List<FlightInformation> flightdetails=List.of(flightInfo);
 			flightInformationRepository.saveAll(flightdetails);
 			
