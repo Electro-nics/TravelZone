@@ -27,7 +27,7 @@ public class TravelZoneApplication {
 	}
 	@Bean
 	CommandLineRunner runner(FlightInformationRepository flightInformationRepository,
-			PassengerInformationRepository passengerRepository,
+//			PassengerInformationRepository passengerRepository,
 			UserInformationRepository userinformationRepository) {
 		Faker fake=new Faker();
 		Random rand=new Random();
@@ -35,9 +35,10 @@ public class TravelZoneApplication {
 		Integer randomNumber= (rand.nextInt(1000,9999));
 		String flightNumber=airLine.substring(0, 2).toUpperCase()+randomNumber.toString();
 		int hours=fake.number().numberBetween(0, 23);
+		int etaHour=fake.number().numberBetween(hours, 23);
 		int min= fake.number().numberBetween(0, 59);
 		String ETD=String.format("%02d", hours)+String.format("%02d", min);
-		String ETA=String.format("%02d", hours)+String.format("%02d", min);
+		String ETA=String.format("%02d", etaHour)+String.format("%02d", min);
 		int fare= fake.number().numberBetween(1000, 9999);
 		String gender="Male";
 		int age=rand.nextInt(20, 60);
@@ -84,13 +85,13 @@ public class TravelZoneApplication {
 					+flightInfo.getSource().subSequence(0, 1).toString().toUpperCase()
 					+flightInfo.getDestination().substring(0, 1).toUpperCase();
 			
-			PassengerInformation passengerInformation= new PassengerInformation(name,
-					Integer.toString(age),
-					email,
-					gender,
-					pnr);
-			List<PassengerInformation> passengerInfo=List.of(passengerInformation);
-			passengerRepository.saveAll(passengerInfo);
+//			PassengerInformation passengerInformation= new PassengerInformation(name,
+//					Integer.toString(age),
+//					email,
+//					gender,
+//					pnr);
+//			List<PassengerInformation> passengerInfo=List.of(passengerInformation);
+//			passengerRepository.saveAll(passengerInfo);
 			UserInformation user= new UserInformation(fake.address().city(),
 					name+String.valueOf(age),
 					"ytui",

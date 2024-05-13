@@ -2,7 +2,7 @@ package com.personal.TravelZone.UserInfo;
 
 import java.util.Optional;
 
-import com.personal.TravelZone.UserInfo.responsePayload.LoginMessage;
+import com.personal.TravelZone.responsePayload.LoginMessage;
 
 public interface UserInformationDAO {
 	

@@ -1,4 +1,4 @@
-package com.personal.TravelZone.UserInfo.responsePayload;
+package com.personal.TravelZone.responsePayload;
 
 public class LoginMessage {
 String message;

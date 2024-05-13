@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.personal.TravelZone.UserInfo.responsePayload.LoginMessage;
+import com.personal.TravelZone.responsePayload.LoginMessage;
 
 @RestController
 @CrossOrigin
 @RequestMapping("api/v1/travelZoneUser")
 public class UserInformationController {
+	
 	public final UserInformationService userInformationService;
 	
 public UserInformationController(UserInformationService userInformationService) {

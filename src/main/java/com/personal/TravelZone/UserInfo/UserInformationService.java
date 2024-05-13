@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.personal.TravelZone.UserInfo.responsePayload.LoginMessage;
 import com.personal.TravelZone.exceptions.DuplicateResourceException;
+import com.personal.TravelZone.responsePayload.LoginMessage;
 @Service
 public class UserInformationService {
 	public final UserInformationDAO userInformationDAO;

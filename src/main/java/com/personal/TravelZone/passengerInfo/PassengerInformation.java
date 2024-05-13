@@ -2,31 +2,36 @@ package com.personal.TravelZone.passengerInfo;
 
 import java.util.Objects;
 
+import com.personal.TravelZone.TicketBooking.TicketBooking;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "PassengerInformation")
 public class PassengerInformation {
 	@Id
-	@SequenceGenerator(name="flight_id_sequence",
-	sequenceName = "passenger_id_sequence"
-			)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator="passenger_id_sequence"
-			)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@Column(name = "passenger_id")
 	private Integer id;
 	private String name;
 	private String age;
 	private String  email;
 	private String gender;
+	@Column(name = "pnr_details")
 	private String pnrDetails;
+	@ManyToOne
+	@JoinColumn(name = "booking_id")
+	 private TicketBooking ticketBooking;
 	public PassengerInformation() {}
-	public PassengerInformation( String name, String age, String email, String gender, String pnrDetails) {
+	public PassengerInformation( String name, String age,
+			String email, String gender, String pnrDetails) {
 		
 		this.name = name;
 		this.age = age;
